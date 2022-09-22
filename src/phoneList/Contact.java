@@ -20,5 +20,44 @@ package phoneList;
 
 
 public class Contact {
+	
+	private String name;
+	
+	private Long number;
+	
+	
 
+	public Contact(String name, Long number) {
+		this.name = name;
+				
+	    this.number = number; 
+				
+	}
+	
+	public String getName() {
+    	
+  		return  name;
+	}
+	
+	public Long getNumber() {
+    	
+  		return number;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setNumber(Long number) {
+		this.number = number;
+	}
+	
+	@Override
+	  public String toString() {
+			
+	    //Helps format printing of information later on Runner page
+	     return " " +name + "  --  " + number;
+    }
+	
+	
 }

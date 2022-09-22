@@ -1,6 +1,10 @@
 package phoneList;
 
+import java.util.ArrayList;
+
 import java.util.Scanner;
+
+
 
 /*
  * Phone List
@@ -26,16 +30,25 @@ import java.util.Scanner;
 
 public class PhoneList {
 
-	/*
+	  /*
 	 * Instance Variables
 	 */
 	
+	 public static ArrayList<Contact> list;
+	 public static ArrayList<String> name;
+	 public static ArrayList<Long> number;
+	 public static int count;
 	
 	
+	static Scanner inKey = new Scanner(System.in);
 	//Constructor
 	public PhoneList() {
 		//initialize instance variables
-	}
+		list = new ArrayList<Contact>();
+	    name = new ArrayList<String>();
+		number = new ArrayList<Long>();
+		count = 0;
+}
 	
 	
 	/*
@@ -49,7 +62,78 @@ public class PhoneList {
 	 *   - tell the user what the new contact is and that 
 	 *        it's been added
 	 */
+	
+	
 	public static void addContact() {
+		
+        System.out.println();
+		System.out.println("Enter contact name: ");
+		
+		if (count > 0) {
+		
+		     String filler = inKey.nextLine();
+		}
+		
+		String contact = inKey.nextLine();
+		
+		name.add(contact);
+		
+		 System.out.println();
+		System.out.println("Enter contact number: ");
+		
+		Long contactNum = inKey.nextLong();
+		
+		number.add(contactNum);
+		
+		Contact c1 = new Contact(contact,contactNum );
+		
+		 String holder;
+		 Long numName;
+		 Long numName2;
+		 String holder2;
+		
+		if (count > 0) {
+		 
+		 for (int i = 0 ; i < name.size(); i++) {
+	            for (int j = i + 1; j < name.size(); j++) {
+	               
+	            	int value = name.get(i).compareTo(name.get(j));
+	            	
+	                // to compare one string with other strings
+	                if (value > 0) {
+
+	                    // swapping
+	                    holder = name.get(j);
+	                    holder2 = name.get(i);
+	                    name.set(i, holder);
+	                    name.set(j,holder2);
+	              
+	                    numName = number.get(j);
+	                    numName2 = number.get(i);
+	                    number.set(i, numName);
+	                    number.set(j,numName2);
+ 
+	                }
+	            }
+	        }
+		} else {
+			
+			list.add(c1);
+			
+		}
+		list.clear();
+		for (int i = 0; name.size() > i; i++) {
+			
+			Contact c3 = new Contact(name.get(i),number.get(i));
+			
+			list.add(c3);
+			
+		}
+		count++;
+		System.out.println();
+		
+		 
+		 System.out.println("Contact \"" + contact + "\" under the number \"" + contactNum + "\" has been added");
 		
 		
 	}
@@ -72,7 +156,25 @@ public class PhoneList {
 	 */
 	public static void removeContact() {
 		
+		System.out.println();
 		
+		System.out.println("What contact would you like to delete?");
+		
+		String remove = inKey.next();
+		
+		for (int i = 0; i < name.size(); i++) {
+			if (name.get(i).equals(remove)) {
+				
+				name.remove(i);
+				list.remove(i);
+				number.remove(i);
+				
+			}
+		}
+		
+		System.out.println("Contact \"" + remove + "\"  has been removed" );
+		
+		System.out.println();
 	}
 	
 	
@@ -88,6 +190,17 @@ public class PhoneList {
 	 *          #################
 	 */
 	public static void printList() {
+		
+		System.out.println("\n\n-----------------------");
+		System.out.println("   Name      Number\n-----------------------");
+		
+		
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i) + "\n");
+		}
+		
+		System.out.println("-----------------------");
+		System.out.println("\n");
 		
 	}
 
@@ -165,6 +278,7 @@ public class PhoneList {
 	
 	
 	public static void main(String[] args) {
+		
 		PhoneList app = new PhoneList();
 		app.menu();
 	}
